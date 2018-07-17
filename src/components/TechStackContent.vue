@@ -41,14 +41,6 @@
             <li>Run tests: <code>npm run test:unit</code></li>
           </ul>
         </li>
-        <li>E2E Testing:
-          <ul>
-            <li>Nightwatch was used for E2E testing</li>
-            <li>I wrote tests to test page load with initial news items, searching for data while expecting results and
-            searching for data while expecting no data</li>
-            <li>Run tests: <code>npm run test:e2e</code></li>
-          </ul>
-        </li>
       </ul>
       </li>
     </ul>
