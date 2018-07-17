@@ -1,12 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class = "mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class = "mdl-layout__header">
+        <div class = "mdl-layout__header-row">
+           <span class = "mdl-layout-title">Guide Me</span>
+        </div>
+        <Navigation />
+      </header>
+      <main class="mdl-layout__content">
+        <router-view/>
+      </main>
     </div>
-    <router-view/>
   </div>
 </template>
+
+<script>
+  import Navigation from '@/components/Navigation'
+  export default {
+    name: 'app',
+    components: {
+      Navigation
+    }
+  }
+</script>
 
 <style lang="scss">
 #app {

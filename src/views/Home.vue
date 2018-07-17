@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="main">
+    <items-list />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  import ItemsList from '@/components/ItemsList'
+  export default {
+    name: 'home',
+    components: {
+      ItemsList
+    },
+    mounted () {
+      // we are calling the upgradeAllRegistered & upgradeDom methods to ensure that all the objects with css classes
+      // are instantiated.
+      if (window.componentHandler) {
+        window.componentHandler.upgradeAllRegistered()
+        window.componentHandler.upgradeDom()
+      }
+    }
   }
-}
 </script>
