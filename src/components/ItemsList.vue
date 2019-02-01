@@ -26,24 +26,16 @@
         </div>
       </div>
       <div id="list-container" class="mdl-grid list-container">
-        <template v-if="itemsList && itemsList.length > 0 && itemsList[0].items && itemsList[0].items.length > 0">
-          <template v-for="item in itemsList[0].items">
-            <item :item="item"></item>
-          </template>
+        <template v-if="itemsData">
+            <item v-for="item in itemsList[0].items" :item="item" :key="item.referralId"></item>
         </template>
-        <template v-else-if="status.loading">
-          <div id="loading" class="full-width">
-            <div class="mdl-spinner mdl-js-spinner is-active"></div>
-          </div>
-        </template>
-        <template v-else-if="status.error">
-          <div class="full-width">An error has occured, please try again later.</div>
-        </template>
-        <template v-else>
-          <div id="no-data" class="full-width">
-            Your search did not match any results.
-          </div>
-        </template>
+        <div v-else-if="status.loading" id="loading" class="full-width">
+          <div class="mdl-spinner mdl-js-spinner is-active"></div>
+        </div>
+        <div v-else-if="status.error" class="full-width">An error has occured, please try again later.</div>
+        <div v-else id="no-data" class="full-width">
+          Your search did not match any results.
+        </div>
       </div>
     </main>
   </div>
@@ -79,13 +71,8 @@ export default {
   methods: {
     ...mapActions({
       getItems: 'getItems',
-      clearItems: 'clearItems',
-      triggerLoading: 'triggerLoading'
     }),
     listItems () {
-      // empty old data before doing a new search
-      this.clearItems()
-      this.triggerLoading()
       if (navigator.geolocation) {
         var context = this
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -119,6 +106,11 @@ export default {
     }
   },
   computed: {
+    itemsData () {
+      if (this.itemsList && this.itemsList.length > 0 && this.itemsList[0].items && this.itemsList[0].items.length > 0) {
+        return this.itemsList
+      }
+    },
     isSearchDisabled () {
       if (this.query.length > 1) {
         return false

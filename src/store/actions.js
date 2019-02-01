@@ -3,6 +3,7 @@ import * as api from '@/api'
 export const actions = {
   getItems ({commit}, payload) {
     // commit LOADING until the promise is fulfilled
+    commit('CLEAR_ITEMS')
     commit('LOADING')
     // structure the parameters to pass them to the api class
     var parameters = '&ll=' + payload.latitude + ',' + payload.longitude
@@ -30,13 +31,5 @@ export const actions = {
           message: 'an error has occured'
         })
       })
-  },
-
-  // reset the itemList state to empty array
-  clearItems ({commit}) {
-    commit('CLEAR_ITEMS')
-  },
-  triggerLoading ({commit}) {
-    commit('LOADING')
   }
 }
